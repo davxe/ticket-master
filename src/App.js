@@ -3,6 +3,8 @@ import {BrowserRouter,Link,Route,Switch} from 'react-router-dom'
 import Home from './component/static/Home'
 import Login from './component/auth/Login'
 import Register from './component/auth/Register'
+import Customer from './component/customer/Customer'
+import AddCustomer from './component/customer/AddCustomer'
 import {connect} from 'react-redux'
 import { startUserLogout } from './actions/userAction'
 function App(props)
@@ -37,6 +39,8 @@ function App(props)
                     <Route path='/' component={Home} exact={true}/>
                     <Route path='/users/login' component={Login}/>
                     <Route path='/users/register' component={Register}/>
+                    <Route path='/users/customer' component={Customer} exact={true}/>
+                    <Route path='/users/customer/addcustomer' component={AddCustomer}/>
                 </Switch>
             </div>
         </BrowserRouter>
@@ -44,7 +48,8 @@ function App(props)
 }
 const mapStateToProps=(state)=>{
     return{
-        user:state.user
+        user:state.user,
+        customer:state.customer
     }
 }
 
