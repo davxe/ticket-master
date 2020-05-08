@@ -21,6 +21,25 @@ export const startSetCustomer = () => {
     }
 }
 
+export const removeCustomer = (id) => {
+    return { 
+        type: 'REMOVE_CUSTOMER', payload: id
+    }
+}
+
+export const startRemoveCustomer=(id)=>{
+    return (dispatch)=>{
+        axios.delete(`/customers/${id}`, {
+            headers: {
+                'x-auth' : localStorage.getItem('authToken')
+            }
+        })
+        .then((response) => {
+            const customer = response.data 
+            dispatch(removeCustomer(customer._id))
+        })
+    }
+}
 export const addCustomer = (customer) => {
     return {
         type: 'ADD_CUSTOMER', 

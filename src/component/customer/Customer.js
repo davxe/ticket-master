@@ -1,10 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {startSetCustomer} from '../../actions/customerAction'
+import {startSetCustomer,startRemoveCustomer} from '../../actions/customerAction'
 
 function Customer(props)
 {
+    const handleRemove=(id)=>{
+        const confirmRemove=window.confirm('are you sure')
+        if(confirmRemove)
+        {
+            props.dispatch(startRemoveCustomer(id))
+        }
+    }
     if(props.customer.length == 0) {
         props.dispatch(startSetCustomer())
     }
@@ -12,9 +19,9 @@ function Customer(props)
     return(
         <div>
             <h2>Customers-{props.customer.length}</h2>
-            <table border='0'>
+            <table border='0' style={{textAlign:"center",background:'rgb(219, 216, 35)'}}>
                 <thead>
-                    <tr>
+                    <tr style={{background:"blue"}}>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -32,8 +39,8 @@ function Customer(props)
                                     <td>{ele.name}</td>
                                     <td>{ele.email}</td>
                                     <td>{ele.mobile}</td>
-                                    <td><button>show</button></td>
-                                    <td><button>remove</button></td>
+                                    <td><button style={{background:"rgb(18, 237, 14)",textDecoration:"none"}}>show</button></td>
+                                    <td><button onClick={()=>handleRemove(ele._id)} style={{background:"red"}}>remove</button></td>
                                 </tr>
                             )
                         })
